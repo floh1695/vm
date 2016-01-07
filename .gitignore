@@ -39,4 +39,5 @@ bin/*
 *~
 ~*
 log.txt
+.*.lck
 

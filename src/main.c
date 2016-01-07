@@ -4,8 +4,11 @@
 #include "debug.h"
 
 int main(int argc, char **argv) {
+    printf("m1\n");
     debug_printf(LL_DEBUG, "Begin Program\n");
+    printf("m2\n");
     debug_printf(LL_DEBUG, "Begin Program\n");
+    printf("m3\n");
     
     int c;
     while (1) {
