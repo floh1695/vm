@@ -7,7 +7,7 @@ CFLAGS = -Wall -pipe
 all: debug
 
 .PHONY:
-release: CFLAGS += -O2
+release: CFLAGS += -O2 -DDEBUG=LL_WARN -DLOG_FILE=\"log.txt\"
 release: build
 
 .PHONY:

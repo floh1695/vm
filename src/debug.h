@@ -9,7 +9,7 @@
 #define LL_DEBUG 4
 
 #ifndef DEBUG
-#define DEBUG LL_ERROR
+#define DEBUG LL_WARN
 #endif // DEBUG
 
 void debug_fprintf(FILE *stream, int loglevel,
