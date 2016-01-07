@@ -4,14 +4,14 @@ CC = gcc
 CFLAGS = -Wall -pipe
 
 .PHONY:
-all: release
+all: debug
 
 .PHONY:
 release: CFLAGS += -O2
 release: build
 
 .PHONY:
-debug: CFLAGS += -g -O0 -DDEBUG
+debug: CFLAGS += -g -O0 -DDEBUG=LL_DEBUG
 debug: build
 
 .PHONY:
@@ -25,6 +25,8 @@ bin:
 
 bin/%.o: src/%.c
 	$(CC) -c $(CFLAGS) $< -o $@
+
+bin/%.c: bin/%.h
 
 .PHONY:
 clean:
