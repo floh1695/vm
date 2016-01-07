@@ -30,7 +30,7 @@ bin:
 bin/%.o: src/%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-bin/%.c: bin/%.h
+src/%.c: src/%.h
 
 .PHONY: clean
 clean:
