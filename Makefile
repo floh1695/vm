@@ -3,21 +3,22 @@
 CC = gcc
 CFLAGS = -Wall -pipe
 
-.PHONY:
+.PHONY: all
 all: debug
 
-.PHONY:
+.PHONY: release
 release: CFLAGS += -O2 -DDEBUG=LL_WARN -DLOG_FILE=\"log.txt\"
 release: .release.lck build 
 
-.PHONY:
+.PHONY: debug
 debug: CFLAGS += -g -O0 -DDEBUG=LL_DEBUG
-debug: debug.lck build
+debug: .debug.lck build
 
-.PHONY:
+.PHONY: build
 build: bin bin/vm
 
-%.lck: clean
+.%.lck:
+	$(MAKE) clean
 	touch $@
 
 bin/vm: bin/main.o bin/debug.o
@@ -31,9 +32,9 @@ bin/%.o: src/%.c
 
 bin/%.c: bin/%.h
 
-.PHONY:
+.PHONY: clean
 clean:
 	rm -rf bin
 	rm -rf log.txt
-	rm -rf *.lck
+	rm -rf .*.lck
 
