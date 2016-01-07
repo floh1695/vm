@@ -4,18 +4,22 @@ CC=gcc
 CFLAGS=-Wall -g
 
 .PHONY:
-all: bin build
+all: build
 
 .PHONY:
-build: bin/vm
+debug: CFLAGS+=-DDEBUG
+debug: build
 
-bin/vm: bin/main.o
+.PHONY:
+build: bin bin/vm
+
+bin/vm: bin/main.o bin/debug.o
 	$(CC) $^ -o $@
 
 bin:
 	mkdir -p bin
 
-bin/main.o: src/main.c
+bin/%.o: src/%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 .PHONY:
