@@ -1,13 +1,17 @@
 #!/usr/bin/make
 
-CC=gcc
-CFLAGS=-Wall -g
+CC = gcc
+CFLAGS = -Wall -pipe
 
 .PHONY:
-all: build
+all: release
 
 .PHONY:
-debug: CFLAGS+=-DDEBUG
+release: CFLAGS += -O2
+release: build
+
+.PHONY:
+debug: CFLAGS += -g -O0 -DDEBUG
 debug: build
 
 .PHONY:
