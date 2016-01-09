@@ -1,7 +1,7 @@
-#include <stdlib.h>
-#include <getopt.h>
+#include <getopt.h> //getopt_long
 
 #include "debug.h"
+#include "memory.h"
 
 int main(int argc, char **argv) {
     debug_printf(LL_DEBUG, "Begin Program\n");
@@ -33,7 +33,9 @@ int main(int argc, char **argv) {
                 return -1;
         }
     }
-    
+   
+    free(memory_new());
+ 
     return 0;
 }
 

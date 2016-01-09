@@ -1,7 +1,7 @@
 #!/usr/bin/make
 
 CC = gcc
-CFLAGS = -Wall -pipe
+CFLAGS = -Werror -Wall -pipe
 
 .PHONY: all
 all: debug
@@ -21,7 +21,11 @@ build: bin bin/vm
 	$(MAKE) clean
 	touch $@
 
-bin/vm: bin/main.o bin/debug.o
+bin/vm: bin/main.o \
+		bin/debug.o \
+		bin/machine.o \
+		bin/memory.o \
+		bin/page.o
 	$(CC) $^ -o $@
 
 bin:
@@ -31,6 +35,7 @@ bin/%.o: src/%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 src/%.c: src/%.h
+	@touch $@
 
 .PHONY: clean
 clean:
