@@ -33,8 +33,6 @@ int main(int argc, char **argv) {
                 return -1;
         }
     }
-   
-    free(memory_new());
  
     return 0;
 }

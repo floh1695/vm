@@ -13,7 +13,6 @@
 #define DEBUG LL_WARN
 #endif // DEBUG
 
-
 int debug_vfprintf(FILE *stream, int log_level, const char *format,
         va_list arg);
 int debug_vprintf(int log_level, const char *format, va_list arg);
