@@ -2,8 +2,8 @@
 
 #define DEBUG_H_
 
+#include <stdarg.h> //va_list
 #include <stdio.h> //FILE, fprintf, fclose, fopen, stdout
-//#include <string.h> //strcmp
 
 #ifndef LOG_FILE
 #define LOG_FILE NULL
@@ -12,20 +12,41 @@
 char* log_to_char(int log_level);
 FILE* get_log_file();
 
-void debug_fprintf(FILE *stream, int log_level,
-        const char *format, ...) {
-    if (DEBUG >= log_level) {
-        fprintf(stream, "%s", log_to_char(log_level));
-        fprintf(stream, format);
+FILE *log_file = NULL;
+
+int debug_vfprintf(FILE *stream, int log_level, const char *format, 
+        va_list arg) {
+    int wrote = 0;
+    if (stream == NULL) {
+        
+        stream = get_log_file();
     }
+    if (DEBUG >= log_level) {
+        wrote += fprintf(stream, "%s", log_to_char(log_level));
+        wrote += vfprintf(stream, format, arg);
+    }
+    return wrote;
 }
 
-void debug_printf(int log_level, const char *format, ...) {
-    FILE* log_file = get_log_file();
-    debug_fprintf(log_file, log_level, format);
-    if (log_file != stdout) {
-        fclose(log_file);
-    }
+int debug_vprintf(int log_level, const char *format, va_list arg) {
+    return debug_vfprintf(NULL, log_level, format, arg);
+}
+
+int debug_fprintf(FILE *stream, int log_level,
+        const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    int wrote = debug_vfprintf(stream, log_level, format, args);
+    va_end(args);
+    return wrote;
+}
+
+int debug_printf(int log_level, const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    int wrote = debug_vfprintf(log_file, log_level, format, args);
+    va_end(args);
+    return wrote;
 }
 
 char* log_to_char(int log_level) {
@@ -44,7 +65,9 @@ char* log_to_char(int log_level) {
 }
 
 FILE* get_log_file() { 
-    FILE *log_file;
+    if (log_file != NULL) {
+        return log_file;
+    }
     if (LOG_FILE == NULL) {
         log_file = stdout;
     }
