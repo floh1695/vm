@@ -14,7 +14,8 @@
 #endif // DEBUG
 
 
-int debug_vfprintf(FILE *stream, int log_level, const char *format, va_list arg);
+int debug_vfprintf(FILE *stream, int log_level, const char *format,
+        va_list arg);
 int debug_vprintf(int log_level, const char *format, va_list arg);
 int debug_fprintf(FILE *stream, int loglevel,
         const char *format, ...);
