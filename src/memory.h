@@ -5,8 +5,10 @@
 
 struct memory;
 struct memory* memory_new();
-uint8_t* memory_read(int bytes);
-void memory_write(int bytes, uint8_t *data);
+void memory_read(struct memory* memory, uint32_t addr, int bytes,
+        uint8_t *data);
+void memory_write(struct memory* memory, uint32_t addr, int bytes,
+        uint8_t *data);
 
 #endif // _MEMORY_H_
 
