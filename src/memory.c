@@ -20,7 +20,7 @@ struct memory* memory_new() {
 }
 
 uint8_t* memory_read(int bytes) {
-    
+   return NULL; 
 }
 
 void memory_write(int bytes, uint8_t *data) {
