@@ -29,7 +29,8 @@ int main(int argc, char **argv) {
                 debug_printf(LL_WARN, "Program exit due to invalid option\n");
                 return -1;
             default:
-                debug_printf(LL_ERROR, "Program exit due to an unknown error during argument parsing\n");
+                debug_printf(LL_ERROR, 
+                        "Program exit due to an unknown error during argument parsing\n");
                 return -1;
         }
     }

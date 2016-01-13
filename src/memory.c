@@ -1,5 +1,6 @@
 #include "memory.h"
 
+#include <stdint.h>
 #include <stdlib.h> //calloc
 
 #include "segment.h"
@@ -16,5 +17,13 @@ struct memory* memory_new() {
         new_memory->segments[i] = NULL;
     }
     return new_memory;
+}
+
+uint8_t* memory_read(int bytes) {
+    
+}
+
+void memory_write(int bytes, uint8_t *data) {
+    
 }
 
