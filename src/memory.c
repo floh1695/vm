@@ -33,7 +33,8 @@ void memory_read(struct memory *memory, uint32_t addr, int bytes,
 }
 
 void memory_write(struct memory *memory, uint32_t addr, int bytes,
-        uint8_t *data) {    
+        uint8_t *data) {
+    int i;
     for (i = 0; i < bytes; i++) {
         uint16_t segment_number = ((addr + i) & 0xFF00) >> 16;
         uint16_t lower_addr = (addr + i) & 0x00FF;
