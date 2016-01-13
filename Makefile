@@ -11,7 +11,7 @@ release: CFLAGS += -O2 -DDEBUG=LL_WARN -DLOG_FILE=\"log.txt\"
 release: .release.lck build 
 
 .PHONY: debug
-debug: CFLAGS += -g -O0 -DDEBUG=LL_DEBUG -Werror
+debug: CFLAGS += -g -O0 -DDEBUG=LL_DEBUG
 debug: .debug.lck build
 
 .PHONY: build
@@ -25,7 +25,8 @@ bin/vm: bin/main.o \
 		bin/debug.o \
 		bin/machine.o \
 		bin/memory.o \
-		bin/segment.o
+		bin/segment.o \
+		bin/mmu.o
 	$(CC) $^ -o $@
 
 bin:
