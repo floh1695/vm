@@ -22,3 +22,8 @@ struct segment* segment_new() {
     return new_segment;
 }
 
+uint8_t segment_read(struct segment *segment, uint16_t addr) {
+    uint8_t page_number = (addr & 0xFF00) >> 8;
+    uint8_t page_addr = addr & 0x00FF;
+}
+

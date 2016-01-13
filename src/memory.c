@@ -19,13 +19,16 @@ struct memory* memory_new() {
     return new_memory;
 }
 
-void memory_check(struct memory *memory, uint32_t addr);
+void memory_check(struct memory *memory, uint16_t segment_number);
 
 void memory_read(struct memory *memory, uint32_t addr, int bytes,
         uint8_t *data) {
     uint32_t i;
-    for (i = addr; i < addr + bytes; i++) {
-        
+    for (i = 0; i < bytes; i++) {
+        uint16_t segment_number = ((addr + i) & 0xFF00) >> 16;
+        uint16_t lower_addr = (addr + i) & 0x00FF;
+        memory_check(memory, segment_number);
+        data[i] = segment_read(memory->segments[segment_number], lower_addr);
     }
 }
 
@@ -34,10 +37,9 @@ void memory_write(struct memory *memory, uint32_t addr, int bytes,
     
 }
 
-void memory_check(struct memory *memory, uint32_t addr) {
-    uint16_t index = (addr & 0xFF00) >> 16;
-    if (memory->segments[index] == NULL) {
-        memory->segments[index] = segment_new();
+void memory_check(struct memory *memory, uint16_t segment_number) {
+    if (memory->segments[segment_number] == NULL) {
+        memory->segments[segment_number] = segment_new();
     }
 }
 
