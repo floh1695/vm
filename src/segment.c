@@ -25,5 +25,16 @@ struct segment* segment_new() {
 uint8_t segment_read(struct segment *segment, uint16_t addr) {
     uint8_t page_number = (addr & 0xFF00) >> 8;
     uint8_t page_addr = addr & 0x00FF;
+    segment_check(segment, page_number);
+}
+
+uint8_t segment_write(struct segment *segment, uint16_t addr, uint8_t data) {
+    
+}
+
+void segment_check(struct segment *segment, uint8_t page_addr) {
+    if (segment->pages[page_addr] == NULL) {
+        segment->pages[page_addr] = calloc(sizeof(struct page), 1);
+    }
 }
 
