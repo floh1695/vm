@@ -11,7 +11,7 @@ release: CFLAGS += -O2 -DDEBUG=LL_WARN -DLOG_FILE=\"log.txt\"
 release: .release.lck build 
 
 .PHONY: debug
-debug: CFLAGS += -g -O0 -DDEBUG=LL_DEBUG
+debug: CFLAGS += -g -DDEBUG=LL_DEBUG
 debug: .debug.lck build
 
 .PHONY: build
