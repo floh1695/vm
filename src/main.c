@@ -1,13 +1,14 @@
 #include <getopt.h> //getopt_long
 
 #include "debug.h"
+#include "machine.h"
 #include "memory.h"
 
 int main(int argc, char **argv) {
     debug_printf(LL_DEBUG, "Begin Program\n");
     
     // All variables used for the option states
-    char *executable = NULL;
+    char *executable_file = NULL;
     
     int c;
     int option_index = 0;
@@ -21,7 +22,8 @@ int main(int argc, char **argv) {
                 long_options, &option_index);
 
             switch (c) {
-                case 'f': // Get another file to feed into memory
+                case 'f': // Get the file to load into memory
+                    executable_file = optarg;
                     break;
                 case '?':
                     debug_printf(LL_WARN,
@@ -34,7 +36,7 @@ int main(int argc, char **argv) {
             }
     }
 
-    
+    struct machine *machine = machine_new();    
 
     return 0;
 }
