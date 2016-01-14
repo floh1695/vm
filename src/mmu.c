@@ -37,7 +37,7 @@ int mmu_fetch(mmu *unit,uint8_t vpage)
     memory_read(unit->mem,unit->baseaddr+4*i,4,(uint8_t *)&read_entry);
     if(read_entry.vaddr==vpage&&read_entry.flags&MMU_ACTIVE)
     {
-      unit->tlb[unit->lru]=read_entry;
+      unit->tlb[(int)unit->lru]=read_entry;
       unit->lru++;
       unit->lru&=0x3;
       return 1;
@@ -56,7 +56,7 @@ int mmu_check_flags(int table_flags,int user_flags)
   {
     return 0;
   }
-  if(user_flags&(MMU_RD|MMU_WR|MMU_EX)==table_flags&(MMU_RD|MMU_WR|MMU_EX))
+  if((user_flags&(MMU_RD|MMU_WR|MMU_EX))==(table_flags&(MMU_RD|MMU_WR|MMU_EX)))
   {
     return 1;
   }
