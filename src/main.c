@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
     struct machine *machine = machine_new();
     FILE *fp = fopen(executable_file, "r");
-    void machine_load_file_executable(machine, fp);
+    machine_load_file_executable(machine, fp);
     fclose(fp);
     
     return 0;
