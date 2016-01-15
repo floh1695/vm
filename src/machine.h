@@ -14,9 +14,9 @@ struct machine {
 struct machine* machine_new();
 void machine_free(struct machine *machine);
 
-//void machine_load_file_executable(struct machine *machine, FILE *stream);
-void machine_load_executable(struct machine *machine, uint8_t *data, 
-        int size);
+void machine_load_file_executable(struct machine *machine, FILE *stream);
+//void machine_load_executable(struct machine *machine, uint8_t *data, 
+//        int size);
 
 #endif // _MACHINE_H_
 
