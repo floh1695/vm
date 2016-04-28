@@ -38,7 +38,15 @@ int main(int argc, char **argv) {
     }
 
     struct machine *machine = machine_new();
-    FILE *fp = fopen(executable_file, "r");
+    FILE *fp = NULL;
+    if (executable_file) {
+        fp = fopen(executable_file, "r");
+    }
+    else {
+        debug_printf(LL_INFO,
+                "Executble file is NULL\n");
+        return 1;
+    }
     machine_load_file_executable(machine, fp);
     fclose(fp);
     

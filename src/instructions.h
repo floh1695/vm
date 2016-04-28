@@ -1,6 +1,9 @@
 #ifndef _INSTRUCTIONS_H_
 #define _INSTRUCTIONS_H_
 
+// No operation
+#define I_NOOP  0x00
+
 // Store value into reg 
 #define I_STORE 0x10 //store reg(8) value(8)
 
@@ -12,6 +15,9 @@
 
 // Subtract the value of reg1 with reg2 and place the result in reg3
 #define I_SUB   0x21 //sub reg1(8) reg2(8) reg3(8)
+
+// Change the instruction pointer to reg
+#define I_JUMP  0x30 //jump reg
 
 #endif // _INSTRUCTIONS_H_
 
