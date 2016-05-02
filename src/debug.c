@@ -18,7 +18,6 @@ int debug_vfprintf(FILE *stream, int log_level, const char *format,
         va_list arg) {
     int wrote = 0;
     if (stream == NULL) {
-        
         stream = get_log_file();
     }
     if (DEBUG >= log_level) {
