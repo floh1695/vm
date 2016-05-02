@@ -16,16 +16,24 @@ int main(int argc, char **argv) {
     while (optind < argc) {
         // All getopt_long options
         static struct option long_options[] = {
-            {"file", required_argument, 0, 'f'}
+            {"file", required_argument, 0, 'f'},
+            {"help", no_argument, 0, 'h'}
         };
+
         // Getopt uses this to rememeber its index
-        c = getopt_long(argc, argv, "f:",
+        c = getopt_long(argc, argv, "f:h",
                 long_options, &option_index);
 
             switch (c) {
                 case 'f': // Get the file to load into memory
                     executable_file = optarg;
                     break;
+                case 'h': // Help message
+                    printf("[-f  --file] [file]\n");
+                    printf("    load $file into memory to be executed\n");
+                    printf("[-h --help]\n");
+                    printf("    display this message\n");
+                    return 0;
                 case '?':
                     debug_printf(LL_WARN,
                             "Program exit due to invalid option\n");
