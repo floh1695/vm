@@ -32,12 +32,12 @@ typedef struct mmu mmu;
 mmu *mmu_init(struct memory *mem);
 //sets the base address for the translation table in memory. this also voids
 //the entries
-void mmu_set_base(mmu *unit,uint32_t base);
+void mmu_set_base(mmu *unit, uint32_t base);
 //this tells the MMU that it should consider its entries all invalid. good for
 //switching memory contexts.
 void mmu_void_entries(mmu *unit);
 //translates the address pointed to by addr (in place), returning 1 on success,
 //0 on failure.
-int mmu_translate(mmu *unit,uint32_t *addr,int flags);
+int mmu_translate(mmu *unit, uint32_t *addr, int flags);
 
 #endif //MMU_H
