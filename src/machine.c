@@ -1,5 +1,6 @@
 #include "machine.h"
 
+#include <stdint.h>
 #include <stdio.h> //FILE
 #include <stdlib.h> //calloc
 
@@ -19,13 +20,16 @@ void machine_free(struct machine *machine) {
 
 void machine_load_file_executable(struct machine *machine, FILE *stream) {
     int c;
+    uint8_t data;
+    uint32_t addr = 0;
     while (1) {
-        //fread(&c, 1, 1, FILE);
         c = getc(stream);
+        data = (uint8_t) c;
+        addr++;
         if (c == -1) {
             break;
         }
-        putchar(c);
+        memory_write(machine->memory, addr, 1, &data);
     }
 }
 
